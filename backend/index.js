@@ -1,7 +1,5 @@
-
 const express = require('express');
 const mongoose = require("mongoose");
-const {log} = require("nodemon/lib/utils");
 const mongoURI = 'mongodb://127.0.0.1:27017/test';
 // connectToMongo();connectToMongo
 
