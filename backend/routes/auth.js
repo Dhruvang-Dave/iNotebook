@@ -3,7 +3,6 @@ const router = express.Router();
 const User = require('../models/User');
 
 router.post('/', async (req, res) => {
-
     //create user using : POST './api/auth' , Doesn't require auth :- below code is working too...
     // console.log(User);
     // const newUser = await User.create(req.body)
