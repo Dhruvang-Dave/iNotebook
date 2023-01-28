@@ -1,7 +1,6 @@
 const express = require('express');
 const mongoose = require("mongoose");
-const mongoURI = 'mongodb://127.0.0.1:27017/test';
-// connectToMongo();connectToMongo
+const mongoURI = 'mongodb://127.0.0.1:27017/inotebook';
 
 async function main() {
     //Instead of '127.0.0.1' , 'localhost' is not working
@@ -9,12 +8,7 @@ async function main() {
 }
 main().catch(err => console.log(err));
 const app = express()
-const port = 3000
-
-// Availabe routes
-// app.get('/', (req,res) => {
-//     res.send('Hello!')
-// })
+const port = 5000
 
 app.use(express.json());
 app.use('/api/auth', require('./routes/auth'));
