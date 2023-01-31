@@ -22,10 +22,10 @@ router.get('/fetchnotes', fetchuser, async  (req, res)=>{
 
 // ROUTE : 2  Add new note using POST /api/auth/addnote. LOGIN REQUIRE.
 
-router.get('/addnote', fetchuser, [
-    body('title', 'Enter a valid title').isLength({ min: 1 }),
-    body('description', 'Enter a valid description').isLength({ min: 1 }),
-    body('tag', "Password must be at least 5 characters").isLength({ min: 1 }),
+router.post('/addnote', fetchuser, [
+    body('title', 'Enter a valid title').isLength({ min: 3 }),
+    body('description', 'Enter a valid description').isLength({ min: 5 }),
+    body('tag', 'Tag must be a valid').isLength({ min: 2 })
 ],async  (req, res)=>{
 
     const errors = validationResult(req);
@@ -37,7 +37,7 @@ router.get('/addnote', fetchuser, [
     try {
         // const notes = await Notes.find({ user: req.user.id});
         const user = req.user._id;
-        const note = await new Notes({
+        const note = new Notes({
             user, title, description, tag
         })
         const savedNote = await note.save();
@@ -63,9 +63,7 @@ router.put('/updatenote/:id', fetchuser, async  (req, res)=>{
         if(title){ newNote.title = title };
         if(description){ newNote.description = description };
         if(tag){ newNote.tag = tag };
-        // console.log( newNote.title == title);
 
-        // console.log(req.params);
         //Find the note that need to be updated.
         let note = await Notes.findById(req.params.id);
         if(!note){ res.status(404).send("Not found")}
@@ -99,7 +97,7 @@ router.delete('/deletenote/:id', fetchuser, async  (req, res)=>{
 
         note = await Notes.findByIdAndDelete(note);
 
-        res.send({note}).send( "Note deleted successfully")
+        res.send({note})
 
     }catch (e) {
         console.error(errors.message);

@@ -1,6 +1,7 @@
 const express = require('express');
 const mongoose = require("mongoose");
 const mongoURI = 'mongodb://127.0.0.1:27017/inotebook';
+var cors = require('cors')
 
 async function main() {
     //Instead of '127.0.0.1' , 'localhost' is not working
@@ -8,6 +9,8 @@ async function main() {
 }
 main().catch(err => console.log(err));
 const app = express()
+
+app.use(cors())
 const port = 5000
 
 app.use(express.json());
